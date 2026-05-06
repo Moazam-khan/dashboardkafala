@@ -1,0 +1,905 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1440" />
+<title>Kafala â€” Employee Service Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- ============== SIDEBAR ============== -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="mark">K</div>
+      <div>
+        <div class="name">Kafala</div>
+        <div class="org">Al-Rashid Holdings</div>
+      </div>
+    </div>
+
+    <div class="nav-label">Workspace</div>
+    <button class="nav-item" data-screen="dashboard">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+      Dashboard
+    </button>
+    <button class="nav-item" data-screen="employees">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M15 20c0-2.5 2-4.5 4.5-4.5"/></svg>
+      Employees
+      <span class="badge">6</span>
+    </button>
+    <button class="nav-item" data-screen="services">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/><path d="M8 15h4"/></svg>
+      Services
+    </button>
+    <button class="nav-item" data-screen="reports">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 20V10"/><path d="M10 20V4"/><path d="M16 20v-7"/><path d="M22 20H2"/></svg>
+      Reports
+    </button>
+    <button class="nav-item" data-screen="settings">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 0 1-4 0v-.1A1.7 1.7 0 0 0 9 19.4a1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 0 1 0-4h.1A1.7 1.7 0 0 0 4.6 9a1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 0 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 0 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
+      Settings
+    </button>
+
+    <div class="nav-label">Alerts</div>
+    <button class="nav-item">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2v4"/><path d="M5 9a7 7 0 0 1 14 0v5l2 3H3l2-3V9z"/><path d="M10 21a2 2 0 0 0 4 0"/></svg>
+      Expiring (30d)
+      <span class="badge" style="background:#3a2317; color:#f1a98a">17</span>
+    </button>
+    <button class="nav-item">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+      Pending pay
+      <span class="badge" style="background:#3a2317; color:#f1a98a">9</span>
+    </button>
+
+    <div class="sidebar-footer">
+      <div class="avatar">FA</div>
+      <div>
+        <div class="who">Faisal Al-Rashid</div>
+        <div class="role">Super Admin</div>
+      </div>
+      <svg style="margin-left:auto;color:#7e858e" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/></svg>
+    </div>
+  </aside>
+
+  <!-- ============== MAIN ============== -->
+  <main class="main">
+    <header class="topbar">
+      <div class="crumbs">
+        <span>Kafala</span>
+        <span style="color:var(--muted-2)">/</span>
+        <span class="here" id="crumb">Dashboard</span>
+      </div>
+
+      <div class="top-search">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input placeholder="Search employees, Iqama numbers, servicesâ€¦" />
+        <kbd>âŒ˜K</kbd>
+      </div>
+
+      <button class="icon-btn" title="Help">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 0 1 5 0c0 1.5-2.5 2-2.5 3.5"/><circle cx="12" cy="17" r=".7" fill="currentColor"/></svg>
+      </button>
+      <button class="icon-btn dot" title="Notifications">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 9a7 7 0 0 1 14 0v5l2 3H3l2-3V9z"/><path d="M10 21a2 2 0 0 0 4 0"/></svg>
+      </button>
+      <button class="btn primary" onclick="openModal()">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+        New service
+      </button>
+    </header>
+
+    <!-- ===== DASHBOARD ===== -->
+    <section class="page screen on" id="screen-dashboard">
+      <div class="page-head">
+        <div>
+          <h1>Dashboard</h1>
+          <div class="sub">Snapshot of cost, expiry and activity across <b>6 employees</b> Â· Q2 2026</div>
+        </div>
+        <div class="page-actions">
+          <div class="seg">
+            <button>7d</button>
+            <button class="on">30d</button>
+            <button>90d</button>
+            <button>YTD</button>
+          </div>
+          <button class="btn">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+            Export
+          </button>
+        </div>
+      </div>
+
+      <!-- Alert -->
+      <div class="alert" style="margin-bottom:16px">
+        <svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10.3 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.7 3.86a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4"/><circle cx="12" cy="17" r=".7" fill="currentColor"/></svg>
+          <span><b>17 services</b> are expiring in the next 30 days Â· <b>SAR 24,180</b> in pending payments overdue.</span>
+          <button class="btn sm" style="margin-left:auto; background:#fff; border-color:#e7c98c; color:#7a4f0a">Review now</button>
+      </div>
+
+      <!-- KPIs -->
+      <div class="kpis">
+        <div class="kpi">
+          <div class="label">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/></svg>
+            Total Employees
+          </div>
+          <div class="value num">6</div>
+          <div class="delta"><span class="pill">+2</span> hired this quarter</div>
+          <svg class="spark" width="84" height="32" viewBox="0 0 84 32"><polyline fill="none" stroke="oklch(0.52 0.08 195)" stroke-width="1.5" points="0,22 12,18 22,20 32,15 44,17 56,11 68,13 84,7"/></svg>
+        </div>
+        <div class="kpi">
+          <div class="label">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg>
+            Total Services (YTD)
+          </div>
+          <div class="value num" id="kpi-total-svc">42</div>
+          <div class="delta"><span class="pill">+12.4%</span> vs prev. quarter</div>
+          <svg class="spark" width="84" height="32" viewBox="0 0 84 32"><polyline fill="none" stroke="oklch(0.52 0.08 195)" stroke-width="1.5" points="0,24 12,22 22,18 32,20 44,14 56,12 68,9 84,5"/></svg>
+        </div>
+        <div class="kpi">
+          <div class="label">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            Pending Payments
+          </div>
+          <div class="value num" id="kpi-pending">SAR 9,600<span class="unit">.00</span></div>
+          <div class="delta"><span class="pill down" id="kpi-pending-cnt">3 records</span> across 3 employees</div>
+          <svg class="spark" width="84" height="32" viewBox="0 0 84 32"><polyline fill="none" stroke="#c93838" stroke-width="1.5" points="0,18 12,16 22,19 32,14 44,12 56,16 68,9 84,6"/></svg>
+        </div>
+        <div class="kpi">
+          <div class="label">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2v4"/><path d="M5 9a7 7 0 0 1 14 0v5l2 3H3l2-3V9z"/></svg>
+            Expiring Soon (30d)
+          </div>
+          <div class="value num" id="kpi-expiring">3</div>
+          <div class="delta"><span class="pill warn" id="kpi-critical">1 critical</span> within 7 days</div>
+          <svg class="spark" width="84" height="32" viewBox="0 0 84 32"><polyline fill="none" stroke="#c97a14" stroke-width="1.5" points="0,26 12,24 22,21 32,22 44,18 56,16 68,12 84,10"/></svg>
+        </div>
+      </div>
+
+      <!-- Split: Recent + Side -->
+      <div class="split">
+        <!-- Recent activity table -->
+        <div class="card">
+          <div class="card-head">
+            <h3>Recent activity</h3>
+            <span class="meta">Last 24 hours</span>
+            <button class="btn sm ghost" style="margin-left:auto">View all â†’</button>
+          </div>
+          <table class="tbl">
+            <thead>
+              <tr>
+                <th style="width:36px"></th>
+                <th>Employee</th>
+                <th>Service</th>
+                <th class="right">Amount</th>
+                <th>Status</th>
+                <th>Updated</th>
+              </tr>
+            </thead>
+            <tbody id="recent-rows"></tbody>
+          </table>
+        </div>
+
+        <!-- Side stack -->
+        <div style="display:flex; flex-direction:column; gap:16px">
+          <!-- Cost trend chart -->
+          <div class="card">
+            <div class="card-head">
+              <h3>Service spend</h3>
+              <span class="meta">Last 6 months</span>
+            </div>
+            <div class="chart-wrap">
+              <svg viewBox="0 0 360 160" width="100%" height="160">
+                <!-- gridlines -->
+                <g stroke="#ececea" stroke-width="1">
+                  <line x1="30" y1="20"  x2="350" y2="20"/>
+                  <line x1="30" y1="60"  x2="350" y2="60"/>
+                  <line x1="30" y1="100" x2="350" y2="100"/>
+                  <line x1="30" y1="140" x2="350" y2="140"/>
+                </g>
+                <g font-family="JetBrains Mono" font-size="9" fill="#9aa0a8">
+                  <text x="0" y="24">60k</text>
+                  <text x="0" y="64">40k</text>
+                  <text x="0" y="104">20k</text>
+                  <text x="0" y="144">0</text>
+                </g>
+                <!-- bars -->
+                <g fill="oklch(0.85 0.04 195)">
+                  <rect x="48"  y="92" width="28" height="48"/>
+                  <rect x="100" y="76" width="28" height="64"/>
+                  <rect x="152" y="60" width="28" height="80"/>
+                  <rect x="204" y="84" width="28" height="56"/>
+                  <rect x="256" y="48" width="28" height="92"/>
+                  <rect x="308" y="36" width="28" height="104"/>
+                </g>
+                <g fill="oklch(0.52 0.08 195)">
+                  <rect x="48"  y="120" width="28" height="20"/>
+                  <rect x="100" y="112" width="28" height="28"/>
+                  <rect x="152" y="100" width="28" height="40"/>
+                  <rect x="204" y="118" width="28" height="22"/>
+                  <rect x="256" y="98" width="28" height="42"/>
+                  <rect x="308" y="86" width="28" height="54"/>
+                </g>
+                <g font-family="Inter" font-size="9.5" fill="#6c727b" text-anchor="middle">
+                  <text x="62" y="155">Nov</text>
+                  <text x="114" y="155">Dec</text>
+                  <text x="166" y="155">Jan</text>
+                  <text x="218" y="155">Feb</text>
+                  <text x="270" y="155">Mar</text>
+                  <text x="322" y="155">Apr</text>
+                </g>
+              </svg>
+              <div class="chart-legend" style="padding-top:8px">
+                <div class="l"><div class="sw" style="background:oklch(0.85 0.04 195)"></div>Renewals</div>
+                <div class="l"><div class="sw" style="background:oklch(0.52 0.08 195)"></div>New issuance</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Expiring list -->
+          <div class="card">
+            <div class="card-head">
+              <h3>Expiring soon</h3>
+              <span class="meta">Next 14 days</span>
+            </div>
+            <div id="expiring-list"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== EMPLOYEES ===== -->
+    <section class="page screen" id="screen-employees">
+      <div class="page-head">
+        <div>
+          <h1>Employees</h1>
+          <div class="sub" id="emp-sub">6 records Â· 3 with pending payments Â· 3 with services expiring in 30 days</div>
+        </div>
+        <div class="page-actions">
+          <button class="btn">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+            Export CSV
+          </button>
+          <button class="btn primary" onclick="openEmpModal()">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+            Add employee
+          </button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="toolbar">
+          <div class="input">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <input placeholder="Search by name or Iqama numberâ€¦" />
+          </div>
+          <div class="chip">All statuses â–¾</div>
+          <div class="chip active">Service type Â· Iqama, +2 <span class="x">Ã—</span></div>
+          <div class="chip">Pending only â–¾</div>
+          <div class="chip">Expiring â‰¤ 30d â–¾</div>
+          <div class="grow"></div>
+          <div class="seg">
+            <button class="on">Table</button>
+            <button>Cards</button>
+          </div>
+          <button class="btn sm">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 6h18"/><path d="M7 12h10"/><path d="M10 18h4"/></svg>
+            Columns
+          </button>
+        </div>
+
+        <table class="tbl" id="emp-tbl">
+          <thead>
+            <tr>
+              <th style="width:32px"><input type="checkbox" class="check" /></th>
+              <th>Employee</th>
+              <th>Iqama Number</th>
+              <th class="right">Active services</th>
+              <th class="right">Pending amount</th>
+              <th>Last activity</th>
+              <th>Status</th>
+              <th style="width:56px"></th>
+            </tr>
+          </thead>
+          <tbody id="emp-rows"></tbody>
+        </table>
+
+        <div style="display:flex; align-items:center; padding: 12px 16px; color: var(--muted); font-size:12.5px; border-top:1px solid var(--line)">
+          <span id="emp-pag">Showing 1â€“6 of 6</span>
+          <div style="margin-left:auto; display:flex; gap:6px">
+            <button class="btn sm">â€¹ Prev</button>
+            <button class="btn sm">Next â€º</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== EMPLOYEE DETAIL (CASE FILE) ===== -->
+    <section class="page screen" id="screen-employee">
+      <div class="page-head">
+        <div>
+          <div class="crumbs" style="font-size:12px; margin-bottom:6px">
+            <span style="cursor:pointer" onclick="show('employees')">Employees</span>
+            <span style="color:var(--muted-2)">/</span>
+            <span class="here" id="case-name-crumb">Mahmoud A. El-Sayed</span>
+          </div>
+          <h1>Case file</h1>
+          <div class="sub" id="case-sub">â€” services on record Â· Joined Nov 2022 Â· Department: Operations</div>
+        </div>
+        <div class="page-actions">
+          <button class="btn ghost">â€¹ Back</button>
+          <button class="btn">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+            Export PDF
+          </button>
+          <button class="btn primary" onclick="openModal()">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+            Add service
+          </button>
+        </div>
+      </div>
+
+      <div class="case-head">
+        <div class="case-avatar" id="case-avatar">ME</div>
+        <div>
+          <div class="name" id="case-name">Mahmoud A. El-Sayed</div>
+          <div class="meta">
+            <span><b>Iqama</b>&nbsp; <span class="mono" id="case-iqama">2384â€“9921â€“077</span></span>
+            <span class="sep">Â·</span>
+            <span><b>Phone</b>&nbsp; <span id="case-phone">+966 55 412 8830</span></span>
+            <span class="sep">Â·</span>
+            <span><b>Joined</b>&nbsp; <span id="case-joined">Nov 14, 2022</span></span>
+            <span class="sep">Â·</span>
+            <span><b>Sponsor</b>&nbsp; Al-Rashid Holdings</span>
+          </div>
+        </div>
+        <div class="stats">
+          <div class="s"><span class="l">Total cost</span><span class="v num" id="case-total">SAR 28,420</span></div>
+          <div class="s"><span class="l">Pending</span><span class="v num" id="case-pending" style="color:var(--red)">SAR 4,200</span></div>
+          <div class="s"><span class="l">Active</span><span class="v num" id="case-active">7</span></div>
+          <div class="s"><span class="l">Expiring 30dÂ </span><span class="v num" id="case-expiring" style="color:var(--amber)">2</span></div>
+        </div>
+      </div>
+
+      <div class="tabs">
+        <button class="on">Overview</button>
+        <button id="tab-history">Service history</button>
+        <button>Documents</button>
+        <button>Audit trail</button>
+        <button>Notes</button>
+      </div>
+
+      <div class="split" style="margin-top:16px">
+        <div class="card">
+          <div class="card-head">
+            <h3>Service history</h3>
+            <span class="meta" id="case-count">â€” records</span>
+            <button class="btn sm ghost" style="margin-left:auto">
+              <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 6h18"/><path d="M7 12h10"/><path d="M10 18h4"/></svg>
+              Filter
+            </button>
+          </div>
+          <div class="toolbar" style="border-bottom:1px solid var(--line)">
+            <div class="input sm">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+              <input placeholder="Search historyâ€¦" />
+            </div>
+            <div class="chip">Service type â–¾</div>
+            <div class="chip">Status â–¾</div>
+            <div class="chip">2024 â€” 2026 â–¾</div>
+          </div>
+          <table class="tbl">
+            <thead>
+              <tr>
+                <th>Service</th>
+                <th class="right">Price</th>
+                <th>Status</th>
+                <th>Expires</th>
+                <th>Comment</th>
+                <th>Entered by</th>
+                <th style="width:36px"></th>
+              </tr>
+            </thead>
+            <tbody id="case-services"></tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <h3>Timeline</h3>
+            <span class="meta">Chronological</span>
+          </div>
+          <div class="timeline" id="timeline"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SERVICES (GLOBAL) ===== -->
+    <section class="page screen" id="screen-services">
+      <div class="page-head">
+        <div>
+          <h1>All services</h1>
+          <div class="sub" id="svc-sub">Global view across employees Â· â€” records YTD Â· â€” total</div>
+        </div>
+        <div class="page-actions">
+          <button class="btn">Saved views â–¾</button>
+          <button class="btn">Export</button>
+          <button class="btn primary" onclick="openModal()">+ New service</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="toolbar">
+          <div class="input">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <input placeholder="Search services or employeesâ€¦" />
+          </div>
+          <div class="chip">Employee â–¾</div>
+          <div class="chip active">Type Â· Iqama, Insurance <span class="x">Ã—</span></div>
+          <div class="chip active">Status Â· Pending, Expiring <span class="x">Ã—</span></div>
+          <div class="chip">Apr 1 â€” Apr 30 â–¾</div>
+          <div class="grow"></div>
+          <button class="btn sm ghost">Clear all</button>
+        </div>
+
+        <!-- Bulk action bar (visible state) -->
+        <div style="padding: 10px 16px; border-bottom:1px solid var(--line)">
+          <div class="bulkbar">
+            <input type="checkbox" class="check" checked style="border-color:#3b424a"/>
+            <span class="cnt">3 selected</span>
+            <span style="color:#a8aeb6">Â·</span>
+            <button class="btn sm">Mark as paid</button>
+            <button class="btn sm">Edit expiry</button>
+            <button class="btn sm">Export</button>
+            <button class="btn sm" style="background:transparent; color:#f1a98a">Delete</button>
+            <button style="margin-left:auto; color:#a8aeb6; font-size:18px; line-height:1; background:none; border:0; cursor:pointer">Ã—</button>
+          </div>
+        </div>
+
+        <table class="tbl">
+          <thead>
+            <tr>
+              <th style="width:32px"><input type="checkbox" class="check" /></th>
+              <th>Employee</th>
+              <th>Service type</th>
+              <th class="right">Price</th>
+              <th>Status</th>
+              <th>Expires</th>
+              <th>Entered by</th>
+              <th>Updated</th>
+              <th style="width:36px"></th>
+            </tr>
+          </thead>
+          <tbody id="svc-rows"></tbody>
+        </table>
+
+        <div style="display:flex; align-items:center; padding: 12px 16px; color: var(--muted); font-size:12.5px; border-top:1px solid var(--line)">
+          <span id="svc-pag">Showing all records Â· Total: <b style="color:var(--ink)">â€”</b></span>
+          <div style="margin-left:auto; display:flex; gap:6px">
+            <button class="btn sm" style="background: var(--ink); color:#fff; border-color:var(--ink)">1</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== REPORTS ===== -->
+    <section class="page screen" id="screen-reports">
+      <div class="page-head">
+        <div>
+          <h1>Reports & analytics</h1>
+          <div class="sub">Q2 2026 Â· Compare against previous quarter Â· last refreshed 4 min ago</div>
+        </div>
+        <div class="page-actions">
+          <div class="seg">
+            <button>Month</button>
+            <button class="on">Quarter</button>
+            <button>Year</button>
+          </div>
+          <button class="btn">Schedule report</button>
+          <button class="btn">Export</button>
+        </div>
+      </div>
+
+      <div class="kpis">
+        <div class="kpi">
+          <div class="label">Avg. cost / employee</div>
+          <div class="value num">SAR 4,982</div>
+          <div class="delta"><span class="pill">+3.1%</span> vs Q1</div>
+        </div>
+        <div class="kpi">
+          <div class="label">Renewal rate</div>
+          <div class="value num">94.2<span class="unit">%</span></div>
+          <div class="delta"><span class="pill">+1.8pp</span> on-time renewals</div>
+        </div>
+        <div class="kpi">
+          <div class="label">On-time payment</div>
+          <div class="value num">86.4<span class="unit">%</span></div>
+          <div class="delta"><span class="pill down">-2.1pp</span> vs Q1</div>
+        </div>
+        <div class="kpi">
+          <div class="label">Compliance score</div>
+          <div class="value num">Aâˆ’</div>
+          <div class="delta"><span class="pill warn">17 expiring</span> in 30 days</div>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <!-- Monthly cost line chart -->
+        <div class="card">
+          <div class="card-head">
+            <h3>Monthly service costs</h3>
+            <span class="meta">SAR Â· last 12 months</span>
+          </div>
+          <div class="chart-wrap">
+            <svg viewBox="0 0 360 180" width="100%" height="180">
+              <g stroke="#ececea" stroke-width="1">
+                <line x1="30" y1="20" x2="350" y2="20"/>
+                <line x1="30" y1="60" x2="350" y2="60"/>
+                <line x1="30" y1="100" x2="350" y2="100"/>
+                <line x1="30" y1="140" x2="350" y2="140"/>
+              </g>
+              <g font-family="JetBrains Mono" font-size="9" fill="#9aa0a8">
+                <text x="0" y="24">120k</text>
+                <text x="0" y="64">90k</text>
+                <text x="0" y="104">60k</text>
+                <text x="0" y="144">30k</text>
+              </g>
+              <!-- area -->
+              <path d="M40,128 L70,118 L100,124 L130,108 L160,98 L190,102 L220,82 L250,86 L280,68 L310,62 L340,48 L340,150 L40,150 Z" fill="oklch(0.96 0.02 195)"/>
+              <path d="M40,128 L70,118 L100,124 L130,108 L160,98 L190,102 L220,82 L250,86 L280,68 L310,62 L340,48"
+                    fill="none" stroke="oklch(0.52 0.08 195)" stroke-width="1.8"/>
+              <!-- dots -->
+              <g fill="oklch(0.52 0.08 195)">
+                <circle cx="40" cy="128" r="2.5"/>
+                <circle cx="70" cy="118" r="2.5"/>
+                <circle cx="100" cy="124" r="2.5"/>
+                <circle cx="130" cy="108" r="2.5"/>
+                <circle cx="160" cy="98" r="2.5"/>
+                <circle cx="190" cy="102" r="2.5"/>
+                <circle cx="220" cy="82" r="2.5"/>
+                <circle cx="250" cy="86" r="2.5"/>
+                <circle cx="280" cy="68" r="2.5"/>
+                <circle cx="310" cy="62" r="2.5"/>
+                <circle cx="340" cy="48" r="3.5" stroke="#fff" stroke-width="2"/>
+              </g>
+              <g font-family="Inter" font-size="9" fill="#6c727b" text-anchor="middle">
+                <text x="40" y="166">May</text>
+                <text x="100" y="166">Jul</text>
+                <text x="160" y="166">Sep</text>
+                <text x="220" y="166">Nov</text>
+                <text x="280" y="166">Jan</text>
+                <text x="340" y="166">Apr</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Cost by service type donut -->
+        <div class="card">
+          <div class="card-head">
+            <h3>Cost by service type</h3>
+            <span class="meta">Q2 2026</span>
+          </div>
+          <div class="chart-wrap" style="display:flex; gap:18px; align-items:center">
+            <svg viewBox="0 0 160 160" width="150" height="150">
+              <!-- donut segments via stroke-dasharray -->
+              <circle cx="80" cy="80" r="60" fill="none" stroke="oklch(0.92 0.03 195)" stroke-width="22"/>
+              <circle cx="80" cy="80" r="60" fill="none" stroke="oklch(0.52 0.08 195)"
+                      stroke-width="22" stroke-dasharray="151 377" transform="rotate(-90 80 80)"/>
+              <circle cx="80" cy="80" r="60" fill="none" stroke="oklch(0.65 0.07 195)"
+                      stroke-width="22" stroke-dasharray="98 377" stroke-dashoffset="-151" transform="rotate(-90 80 80)"/>
+              <circle cx="80" cy="80" r="60" fill="none" stroke="oklch(0.78 0.06 195)"
+                      stroke-width="22" stroke-dasharray="64 377" stroke-dashoffset="-249" transform="rotate(-90 80 80)"/>
+              <text x="80" y="78" text-anchor="middle" font-family="Inter" font-size="11" fill="#6c727b">Total</text>
+              <text x="80" y="94" text-anchor="middle" font-family="Inter" font-size="14" font-weight="600" fill="#15171a">SAR 312k</text>
+            </svg>
+            <div style="display:flex; flex-direction:column; gap:8px; flex:1; font-size:12.5px">
+              <div class="row-flex"><div class="sw" style="width:10px;height:10px;border-radius:3px;background:oklch(0.52 0.08 195)"></div>Iqama renewal <b style="margin-left:auto" class="num">SAR 124k</b></div>
+              <div class="row-flex"><div class="sw" style="width:10px;height:10px;border-radius:3px;background:oklch(0.65 0.07 195)"></div>Medical insurance <b style="margin-left:auto" class="num">SAR 81k</b></div>
+              <div class="row-flex"><div class="sw" style="width:10px;height:10px;border-radius:3px;background:oklch(0.78 0.06 195)"></div>Work permit <b style="margin-left:auto" class="num">SAR 53k</b></div>
+              <div class="row-flex"><div class="sw" style="width:10px;height:10px;border-radius:3px;background:oklch(0.92 0.03 195)"></div>Other <b style="margin-left:auto" class="num">SAR 54k</b></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Expiry trends -->
+        <div class="card">
+          <div class="card-head">
+            <h3>Expiry pipeline</h3>
+            <span class="meta">Next 90 days</span>
+          </div>
+          <div>
+            <div class="stat-line">
+              <div>
+                <div style="font-weight:500">â‰¤ 7 days</div>
+                <div style="color:var(--muted); font-size:12px">5 services Â· SAR 8,400</div>
+              </div>
+              <div class="row-flex"><div class="bar"><i style="width:90%; background:var(--red)"></i></div><b class="num">5</b></div>
+            </div>
+            <div class="stat-line">
+              <div>
+                <div style="font-weight:500">8 â€” 14 days</div>
+                <div style="color:var(--muted); font-size:12px">4 services Â· SAR 6,200</div>
+              </div>
+              <div class="row-flex"><div class="bar"><i style="width:60%; background:var(--amber)"></i></div><b class="num">4</b></div>
+            </div>
+            <div class="stat-line">
+              <div>
+                <div style="font-weight:500">15 â€” 30 days</div>
+                <div style="color:var(--muted); font-size:12px">8 services Â· SAR 11,800</div>
+              </div>
+              <div class="row-flex"><div class="bar"><i style="width:75%"></i></div><b class="num">8</b></div>
+            </div>
+            <div class="stat-line">
+              <div>
+                <div style="font-weight:500">31 â€” 60 days</div>
+                <div style="color:var(--muted); font-size:12px">23 services Â· SAR 31,400</div>
+              </div>
+              <div class="row-flex"><div class="bar"><i style="width:55%"></i></div><b class="num">23</b></div>
+            </div>
+            <div class="stat-line">
+              <div>
+                <div style="font-weight:500">61 â€” 90 days</div>
+                <div style="color:var(--muted); font-size:12px">31 services Â· SAR 42,900</div>
+              </div>
+              <div class="row-flex"><div class="bar"><i style="width:35%"></i></div><b class="num">31</b></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="split" style="grid-template-columns: 1.4fr 1fr;">
+        <!-- Heatmap-ish renewal cadence -->
+        <div class="card">
+          <div class="card-head">
+            <h3>Renewal cadence</h3>
+            <span class="meta">By month Â· darker = more renewals</span>
+          </div>
+          <div class="chart-wrap">
+            <div id="heatmap" style="display:grid; grid-template-columns: 60px repeat(12, 1fr); gap:4px; font-size:10.5px"></div>
+          </div>
+        </div>
+        <!-- Top employees by cost -->
+        <div class="card">
+          <div class="card-head">
+            <h3>Top employees by spend</h3>
+            <span class="meta">Q2 2026</span>
+          </div>
+          <div id="top-emp"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SETTINGS ===== -->
+    <section class="page screen" id="screen-settings">
+      <div class="page-head">
+        <div>
+          <h1>Settings</h1>
+          <div class="sub">Workspace, security, alerts, and audit configuration</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="settings-grid">
+          <div style="padding:16px 16px 16px 12px; border-right:1px solid var(--line)">
+            <div class="settings-nav">
+              <button class="on">Profile</button>
+              <button>Security & OTP</button>
+              <button>Service catalog</button>
+              <button>Alerts & notifications</button>
+              <button>Audit log</button>
+              <button>Data & export</button>
+              <button>Workspace</button>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <div style="font-size:15px; font-weight:600; margin-bottom: 4px">Profile</div>
+            <div style="color:var(--muted); font-size:12.5px">As the only Super Admin, your account is protected by email + phone OTP at every sign-in.</div>
+
+            <div class="settings-row">
+              <div>
+                <div class="lbl">Display name</div>
+                <div class="desc">Shown in audit logs as the actor for any change.</div>
+              </div>
+              <div class="field" style="margin:0; max-width:360px">
+                <input value="Faisal Al-Rashid" />
+              </div>
+            </div>
+
+            <div class="settings-row">
+              <div>
+                <div class="lbl">Sign-in email</div>
+                <div class="desc">A 6-digit code is sent here at every login.</div>
+              </div>
+              <div class="field" style="margin:0; max-width:360px">
+                <input value="faisal@alrashid-holdings.sa" />
+              </div>
+            </div>
+
+            <div class="settings-row">
+              <div>
+                <div class="lbl">Phone (OTP)</div>
+                <div class="desc">SMS OTP, sent in addition to the email code.</div>
+              </div>
+              <div class="field" style="margin:0; max-width:360px">
+                <input value="+966 55 412 8830" />
+              </div>
+            </div>
+
+            <div class="settings-row">
+              <div>
+                <div class="lbl">Require OTP on sensitive actions</div>
+                <div class="desc">Re-verify before deletes, bulk edits, or exports of more than 100 records.</div>
+              </div>
+              <div class="row-flex">
+                <div class="toggle on"></div>
+                <span style="color:var(--muted); font-size:12.5px">Recommended</span>
+              </div>
+            </div>
+
+            <div class="settings-row">
+              <div>
+                <div class="lbl">Auto-detect expired status</div>
+                <div class="desc">Set status to <b>Expired</b> automatically the day after the recorded expiry date.</div>
+              </div>
+              <div class="row-flex">
+                <div class="toggle on"></div>
+              </div>
+            </div>
+
+            <div class="settings-row">
+              <div>
+                <div class="lbl">Expiry alert window</div>
+                <div class="desc">Show services in the dashboard alert panel this many days before expiry.</div>
+              </div>
+              <div class="row-flex">
+                <div class="seg"><button>7d</button><button>14d</button><button class="on">30d</button><button>60d</button></div>
+              </div>
+            </div>
+
+            <div style="display:flex; gap:8px; margin-top: 18px">
+              <button class="btn primary">Save changes</button>
+              <button class="btn ghost">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- ============== ADD / EDIT SERVICE MODAL ============== -->
+<div class="modal-backdrop" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal" role="dialog">
+    <div class="modal-head">
+      <h2 id="modal-title">Add service record</h2>
+    </div>
+    <div class="modal-sub" id="modal-sub">Recording a new service for <b>Mahmoud A. El-Sayed</b> Â· Iqama 2384â€“9921â€“077</div>
+    <div class="modal-body">
+      <div class="field">
+        <label>Service type</label>
+        <select id="f-type">
+          <option>Iqama renewal</option>
+          <option>Medical insurance</option>
+          <option>Work permit</option>
+          <option>Exit re-entry visa</option>
+          <option>GOSI registration</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="grid-2">
+        <div class="field">
+          <label>Price (SAR)</label>
+          <input id="f-price" type="number" min="0" step="50" placeholder="0.00" value="1200" />
+        </div>
+        <div class="field">
+          <label>Status</label>
+          <select id="f-status">
+            <option value="pending">Pending</option>
+            <option value="paid" selected>Paid</option>
+            <option value="expiring">Expiring soon</option>
+            <option value="expired">Expired</option>
+          </select>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="field">
+          <label>Issued on</label>
+          <input id="f-issued" type="date" />
+        </div>
+        <div class="field">
+          <label>Expiry date</label>
+          <input id="f-expiry" type="date" />
+        </div>
+      </div>
+      <div class="field">
+        <label>Comment</label>
+        <textarea id="f-comment" rows="2" placeholder="Optional Â· receipt reference, payment method, etc."></textarea>
+      </div>
+      <div id="f-error" style="display:none; color:var(--red); font-size:12.5px; padding: 6px 0"></div>
+      <div class="field" style="background: var(--bg); border:1px solid var(--line); border-radius:8px; padding: 10px 12px; color:var(--muted); font-size:12px" id="f-audit">
+        Will be logged as <b style="color:var(--ink-2)">Faisal Al-Rashid</b> Â· <span id="f-now"></span> Â· entry will appear in this employee's audit trail.
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn" id="btn-save-another" onclick="saveService(true)">Save & add another</button>
+      <button class="btn primary" id="btn-save" onclick="saveService(false)">Save service</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============== ADD EMPLOYEE MODAL ============== -->
+<div class="modal-backdrop" id="emp-modal" onclick="if(event.target===this)closeEmpModal()">
+  <div class="modal" role="dialog">
+    <div class="modal-head"><h2 id="emp-modal-title">Add new employee</h2></div>
+    <div class="modal-sub">Create an employee record. You can immediately start logging services to their case file.</div>
+    <div class="modal-body">
+      <div class="field">
+        <label>Full name</label>
+        <input id="ef-name" type="text" placeholder="e.g. Khalid Al-Mutairi" />
+      </div>
+      <div class="grid-2">
+        <div class="field">
+          <label>Iqama number</label>
+          <input id="ef-iqama" type="text" placeholder="e.g. 2401-7762-118" />
+        </div>
+        <div class="field">
+          <label>Phone</label>
+          <input id="ef-phone" type="text" placeholder="+966 5X XXX XXXX" />
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="field">
+          <label>Department</label>
+          <select id="ef-dept">
+            <option>Operations</option>
+            <option>Logistics</option>
+            <option>Hospitality</option>
+            <option>Maintenance</option>
+            <option>Admin</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Joined date</label>
+          <input id="ef-joined" type="date" />
+        </div>
+      </div>
+      <div id="ef-error" style="display:none; color:var(--red); font-size:12.5px; padding: 6px 0"></div>
+      <div class="field" style="background: var(--bg); border:1px solid var(--line); border-radius:8px; padding: 10px 12px; color:var(--muted); font-size:12px">
+        After creating, you can add services to their case file via <b style="color:var(--ink-2)">+ New service</b>.
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn ghost" onclick="closeEmpModal()">Cancel</button>
+      <button class="btn primary" onclick="saveEmp()">Create employee</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============== DELETE CONFIRM ============== -->
+<div class="modal-backdrop" id="confirm" onclick="if(event.target===this)closeConfirm()">
+  <div class="modal" role="dialog" style="width:420px">
+    <div class="modal-head"><h2>Delete service?</h2></div>
+    <div class="modal-sub" id="confirm-sub">This will permanently remove the record from this employee's history. The action will be logged in the audit trail.</div>
+    <div class="modal-foot">
+      <button class="btn ghost" onclick="closeConfirm()">Cancel</button>
+      <button class="btn primary" id="confirm-yes" style="background:var(--red); border-color:var(--red)">Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============== TOAST ============== -->
+<div id="toast" style="position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(20px); background:#14171b; color:#fff; padding:10px 16px; border-radius:8px; font-size:13px; box-shadow:var(--shadow); opacity:0; pointer-events:none; transition:all .25s; z-index:200; display:flex; align-items:center; gap:10px"></div>
+
+<script src="intdex.js"></script>
+</body>
+</html>
